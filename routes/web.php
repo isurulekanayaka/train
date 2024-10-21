@@ -24,3 +24,8 @@ Route::get('/index', function () {
 Route::get('/login', function () {
     return view('auth.login');
 })->name('login');
+
+Route::get('/checkout', function () {
+    return view('user.checkout');
+})->name('checkout');
+
