@@ -16,3 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('user.dashboard');
 });
+
+Route::get('/book-ticket', function () {
+    return view('user.book-ticket');
+})->name('book.ticket');
