@@ -40,6 +40,13 @@ Route::post('/reset_password', [AuthController::class, 'reset_password'])->name(
 // Admin routes
 Route::middleware(['checkAdmin'])->group(function () {
     Route::get('/admin-dashboard', [AdminController::class, 'admin_dashboard'])->name('admin_dashboard');
+
+    Route::post('/add_train', [TrainController::class, 'add_train'])->name('add_train');
+
+    Route::get('/add_train', [TrainController::class, 'add_trainView'])->name('add_train');
+
+    Route::get('/all_users', [AdminController::class, 'all_users'])->name('all_users');
+
 });
 
 // User routes
@@ -59,5 +66,3 @@ Route::get('/add_train', function () {
     return view('admin.add-train');
 })->name('add_train');
 
-
-Route::post('/add-train', [TrainController::class, 'add_train'])->name('add_train');

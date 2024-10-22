@@ -1,6 +1,29 @@
 @extends('layout.admin-layout')
 
 @section('admin-content')
+    <!-- Success/Error Alerts -->
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+    
     <form action="{{ route('add_train') }}" method="POST" class="mx-auto gap-5 ">
         @csrf
         <div class="flex flex-col md:flex-row w-full gap-5">
@@ -28,13 +51,21 @@
                     </div>
                 </div>
 
-                <!-- Destination Station -->
+                <!-- Start Station -->
                 <div class="grid grid-cols-1 gap-4 mb-4">
                     <div class="form-group">
                         <input
                             class="w-full px-4 py-2 border rounded-lg form-control focus:outline-none focus:ring focus:ring-blue-500"
-                            name="destinationPoint" id="destinationPoint" type="text" placeholder="Destination Station"
-                            required />
+                            name="startPoint" id="startPoint" type="text" placeholder="Start Station" required />
+                    </div>
+                </div>
+
+                <!-- End Station -->
+                <div class="grid grid-cols-1 gap-4 mb-4">
+                    <div class="form-group">
+                        <input
+                            class="w-full px-4 py-2 border rounded-lg form-control focus:outline-none focus:ring focus:ring-blue-500"
+                            name="endPoint" id="endPoint" type="text" placeholder="Start Station" required />
                     </div>
                 </div>
 

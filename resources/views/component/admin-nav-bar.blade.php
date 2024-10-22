@@ -4,7 +4,7 @@
             <img src="{{ asset('img/logo.png') }}" alt="" class="w-36">
         </div>
         <div class="relative flex items-center justify-center gap-10 h-fit">
-            <a href="" class="text-lg">Dashboard</a>
+            <a href="{{ route('admin_dashboard') }}" class="text-lg">Dashboard</a>
 
             <div class="relative">
                  <a href="#" id="trainButton"
@@ -14,8 +14,7 @@
              <!-- Dropdown Menu -->
              <div id="trainDropdown" class="absolute right-0 z-10 hidden mt-2 bg-white rounded-lg shadow-lg w-52">
                  <div class="w-full p-2">
-                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Add Trains</a>
-                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Manage Trains</a>
+                     <a href="{{ route('add_train') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Add Trains</a>
                      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Delay Trains</a>
                      <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Cancel Trains</a>
                  </div>
@@ -23,7 +22,7 @@
             </div>
 
                 <a href="" class="text-lg">Reservations</a>
-                <a href="" class="text-lg">Users</a>
+                <a href="{{ route('all_users') }}" class="text-lg">Users</a>
 
                 {{-- profile --}}
                 <div class="relative">
@@ -34,9 +33,13 @@
                     <div id="profileDropdown"
                         class="absolute right-0 z-10 hidden mt-2 bg-white rounded-lg shadow-lg w-52">
                         <div class="w-full p-2">
-                            <p class="block px-4 py-2 text-lg text-gray-800 hover:bg-gray-200">Name</p>
+                            <p class="block px-4 py-2 text-lg text-gray-800 hover:bg-gray-200">{{Auth::user()->full_name}}</p>
                             <a href="#" class="block px-4 py-2 text-lg text-gray-800 hover:bg-gray-200">Profile</a>
-                            <a href="#" class="block px-4 py-2 text-lg text-gray-800 hover:bg-gray-200">Logout</a>
+                            <form action="{{ route('logout') }}" method="POST">
+                                @csrf
+                                <button
+                                    class="px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg w-full flex justify-start">Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>
