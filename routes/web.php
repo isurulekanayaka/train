@@ -51,3 +51,10 @@ Route::get('/index', function () {
 Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
+
+
+Route::get('/admin/dashboard', function () {
+    return view('admin.admin-dashboard');
+})->name('admin.dashboard');
+
+
