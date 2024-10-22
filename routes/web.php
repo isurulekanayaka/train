@@ -19,6 +19,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/about-us', function () {
+    return view('about-us');
+});
+
+
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -52,9 +57,10 @@ Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
 
-
 Route::get('/admin/dashboard', function () {
     return view('admin.admin-dashboard');
 })->name('admin.dashboard');
+
+
 
 
