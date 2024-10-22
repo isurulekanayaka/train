@@ -48,4 +48,26 @@ class AuthController extends Controller
             return redirect()->back()->with('error', $e->getMessage()); // Get the error message as string
         }
     }
+
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->route('user_dashboard');
+        }
+        return redirect()->back()->with('error', 'Invalid login credentials');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout(); // Log out the user
+
+        $request->session()->invalidate(); // Invalidate the session
+
+        $request->session()->regenerateToken(); // Regenerate the CSRF token
+
+        return redirect('/login'); // Redirect to login page or home page
+    }
 }

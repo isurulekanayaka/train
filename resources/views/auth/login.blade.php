@@ -75,22 +75,23 @@
                                 up here</button>
                         </span>
                     </div>
+                    <form action="{{ route('login') }}" method="POST" class="flex flex-col w-full">
+                        @csrf
+                        <input type="email" placeholder="Email" name="email"
+                            class="border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
 
-                    <input type="text" placeholder="Username"
-                        class="border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <input type="password" placeholder="Password" name="password"
+                            class="border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
 
-                    <input type="password" placeholder="Password"
-                        class="border border-gray-300 rounded-lg p-3 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-150 ease-in-out">
+                        <!-- Forgot Password link -->
+                        <div class="flex justify-end mb-6">
+                            <a href="#" class="text-blue-500 hover:underline transition duration-150">Forgot
+                                Password?</a>
+                        </div>
 
-                    <!-- Forgot Password link -->
-                    <div class="flex justify-end mb-6">
-                        <a href="#" class="text-blue-500 hover:underline transition duration-150">Forgot
-                            Password?</a>
-                    </div>
-
-                    <button
-                        class="bg-blue-600 text-white rounded-lg p-3 hover:bg-blue-700 transition duration-200">Login</button>
-
+                        <button
+                            class="bg-blue-600 text-white rounded-lg p-3 hover:bg-blue-700 transition duration-200">Login</button>
+                    </form>
                     <div class="flex justify-center">
                         <a href="{{ route('index') }}"
                             class="rounded-lg transition duration-200 text-blue-500 mt-2">Back to Home</a>
