@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TrainController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,12 +20,17 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/index', function () {
+    return view('welcome');
+})->name('index');
 
+// Login Register
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Froget password
 Route::get('/frogot', [AuthController::class, 'frogot_view'])->name('frogot');
 Route::post('/froget_password', [AuthController::class, 'froget_password'])->name('froget_password');
 // Password reset link route
@@ -32,7 +39,7 @@ Route::post('/reset_password', [AuthController::class, 'reset_password'])->name(
 
 // Admin routes
 Route::middleware(['checkAdmin'])->group(function () {
-    // Add more admin routes here
+    Route::get('/admin-dashboard', [AdminController::class, 'admin_dashboard'])->name('admin_dashboard');
 });
 
 // User routes
@@ -44,17 +51,13 @@ Route::get('/book-ticket', function () {
     return view('user.book-ticket');
 })->name('book.ticket');
 
-Route::get('/index', function () {
-    return view('welcome');
-})->name('index');
-
 Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
 
+Route::get('/add_train', function () {
+    return view('admin.add-train');
+})->name('add_train');
 
-Route::get('/admin/dashboard', function () {
-    return view('admin.admin-dashboard');
-})->name('admin.dashboard');
 
-
+Route::post('/add-train', [TrainController::class, 'add_train'])->name('add_train');
