@@ -16,7 +16,10 @@
                     <div class="p-2 w-full">
                         <p class="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">Name</p>
                         <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">Profile</a>
-                        <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">Logout</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button class="px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg w-full flex justify-start">Logout</button>
+                        </form>
                     </div>
                 </div>
             </div>
