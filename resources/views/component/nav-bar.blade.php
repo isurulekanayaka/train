@@ -14,7 +14,7 @@
                 {{-- profile drop down --}}
                 <div id="profileDropdown" class="absolute right-0 mt-2 w-52 bg-white rounded-lg shadow-lg hidden z-10">
                     <div class="p-2 w-full">
-                        <p class="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">Name</p>
+                        <p class="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">{{Auth::user()->full_name}}</p>
                         <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200 text-lg">Profile</a>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf

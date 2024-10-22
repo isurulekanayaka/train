@@ -12,7 +12,8 @@ class Train extends Model
     protected $fillable = [
         'trainNumber',
         'trainName',
-        'destinationPoint',
+        'startPoint',
+        'endPoint',
         'fare1stClass',
         'fare2ndClass',
         'fare3rdClass',

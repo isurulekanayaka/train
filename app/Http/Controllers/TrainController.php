@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Log;
 
 class TrainController extends Controller
 {
+    
+    public function add_trainView()
+    {
+        return view('admin.add-train');
+    }
     public function add_train(Request $request)
     {
         // Dump the request data for debugging (remove this in production)
@@ -20,7 +25,8 @@ class TrainController extends Controller
             $request->validate([
                 "trainNumber" => "required|string",
                 "trainName" => "required|string",
-                "destinationPoint" => "required|string",
+                "startPoint" => "required|string",
+                "endPoint" => "required|string",
                 "fare1stClass" => "required|numeric",
                 "fare2ndClass" => "required|numeric",
                 "fare3rdClass" => "required|numeric",
@@ -36,7 +42,8 @@ class TrainController extends Controller
             $train = Train::create([
                 'trainNumber' => $request->trainNumber,
                 'trainName' => $request->trainName,
-                'destinationPoint' => $request->destinationPoint,
+                'startPoint' => $request->startPoint,
+                'endPoint' => $request->endPoint,
                 'fare1stClass' => $request->fare1stClass,
                 'fare2ndClass' => $request->fare2ndClass,
                 'fare3rdClass' => $request->fare3rdClass,

@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id(); // Auto-incrementing ID
             $table->string('trainNumber')->unique(); // Train number
             $table->string('trainName'); // Train name
-            $table->string('destinationPoint'); // Destination point
+            $table->string('startPoint'); // start point
+            $table->string('endPoint'); // end point
             $table->decimal('fare1stClass', 8, 2); // Fare for 1st class
             $table->decimal('fare2ndClass', 8, 2); // Fare for 2nd class
             $table->decimal('fare3rdClass', 8, 2); // Fare for 3rd class
