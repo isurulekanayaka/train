@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use Exception;
+use App\Models\User;
+use App\Mail\ForgotPassword;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Password;
 
 class AuthController extends Controller
 {
@@ -69,5 +72,64 @@ class AuthController extends Controller
         $request->session()->regenerateToken(); // Regenerate the CSRF token
 
         return redirect('/login'); // Redirect to login page or home page
+    }
+
+    public function frogot_view()
+    {
+        return view('auth.froget_password');
+    }
+
+    public function froget_password(Request $request)
+    {
+        try {
+            $request->validate([
+                'email' => 'required|email|exists:users,email',
+            ]);
+
+            // Generate a password reset token
+            $token = Password::getRepository()->create($user = User::where('email', $request->email)->first());
+
+            // Send the email
+            Mail::to($request->email)->send(new ForgotPassword($request->email, $token));
+
+            return redirect()->back()->with('success', 'Password reset link has been sent to your email.');
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
+
+    public function showResetForm(Request $request)
+    {
+        $token = $request->route('token'); // Get the token from the URL
+        $email = $request->route('email'); // Get the email from the URL
+
+        return view('auth.reset_password', compact('token', 'email'));
+    }
+
+    public function reset_password(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'email' => 'required|email|exists:users,email',
+                'password' => 'required|confirmed|min:8', // Ensure the password is confirmed and meets minimum length
+            ]);
+
+            // Find the user by email
+            $user = User::where('email', $request->email)->first();
+            if (!$user) {
+                return redirect()->back()->with('error', 'User not found.');
+            }
+
+            // Update the user's password
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            // Optionally, log the user in or send a success message
+            return redirect()->route('login')->with('success', 'Password has been reset successfully.');
+        } catch (Exception $e) {
+            // Handle exceptions
+            return redirect()->back()->with('error', $e->getMessage());
+        }
     }
 }

@@ -85,7 +85,8 @@
 
                         <!-- Forgot Password link -->
                         <div class="flex justify-end mb-6">
-                            <a href="#" class="text-blue-500 hover:underline transition duration-150">Forgot
+                            <a href="{{ route('frogot') }}"
+                                class="text-blue-500 hover:underline transition duration-150">Forgot
                                 Password?</a>
                         </div>
 
