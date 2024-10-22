@@ -2,7 +2,7 @@
 
 @section('user-content')
 
-<div class="flex flex-col items-center w-full"> <!-- Use flex-col for vertical stacking -->
+<div class="flex flex-col items-center w-full">
 
     <!-- Hero Section -->
     <div class="flex flex-col items-center justify-center w-full text-center text-white border border-gray-800 h-80" style="background-color: #434343;">
@@ -50,10 +50,7 @@
                     <th class="px-6 py-3 text-left"></th>
                     <th class="px-6 py-3 text-left">Option</th>
                 </tr>
-            </thead>
-            <tbody id="" class="text-sm font-light text-gray-600">
-                <!-- Dynamic rows will be injected here -->
-            </tbody>
+            </thead>  
         </table>
     </div>
 

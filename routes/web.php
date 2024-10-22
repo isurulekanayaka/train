@@ -24,7 +24,13 @@ Route::get('/index', function () {
     return view('welcome');
 })->name('index');
 
-// Login Register
+
+Route::get('/about-us', function () {
+    return view('about-us');
+});
+
+
+
 Route::get('/login', [AuthController::class, 'login_view'])->name('login');
 Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
@@ -62,7 +68,7 @@ Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
 
-Route::get('/add_train', function () {
-    return view('admin.add-train');
-})->name('add_train');
+
+
+
 
