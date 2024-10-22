@@ -21,7 +21,7 @@
             <div class="flex mx-5">
                 <div>
                     <p class="text-lg m-5 group relative w-max h-8">
-                        <a href="#"
+                        <a href="{{ route('login') }}"
                             class="group-hover:text-white text-white text-2xl font-mono font-semibold">Login</a>
                         <span
                             class="absolute left-0 bottom-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-white"></span>
@@ -77,22 +77,22 @@
                 window.onload = setTodayDate;
             </script>
 
-            <div class="bg-white rounded-lg p-6 flex gap-5 w-4/5 opacity-90">
+            <div class="bg-white rounded-lg p-6 py-10 flex gap-5 w-4/5 opacity-90">
                 <section class="w-1/4">
-                    <select class="w-full h-10 rounded-lg border">
+                    <select class="w-full h-10 rounded-lg border px-2">
                         <option value="">test 1</option>
                         <option value="">test 2</option>
                         <option value="">test 3</option>
                     </select>
                 </section>
                 <section class="w-1/4">
-                    <select class="w-full h-10 rounded-lg border">
+                    <select class="w-full h-10 rounded-lg border px-2">
                         <option value="">test 1</option>
                         <option value="">test 2</option>
                         <option value="">test 3</option>
                     </select>
                 </section>
-                <input type="date" id="dateInput" class="border h-10 rounded-lg w-1/4">
+                <input type="date" id="dateInput" class="border px-2 h-10 rounded-lg w-1/4">
                 <button class="bg-blue-500 text-white rounded w-1/4 hover:bg-blue-700">Search</button>
             </div>
         </div>
