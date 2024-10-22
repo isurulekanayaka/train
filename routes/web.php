@@ -24,6 +24,12 @@ Route::post('/register', [AuthController::class, 'register'])->name('register');
 Route::post('/login', [AuthController::class, 'login'])->name('login');
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
+Route::get('/frogot', [AuthController::class, 'frogot_view'])->name('frogot');
+Route::post('/froget_password', [AuthController::class, 'froget_password'])->name('froget_password');
+// Password reset link route
+Route::get('password/reset/{token}/{email}', [AuthController::class, 'showResetForm'])->name('password.reset');
+Route::post('/reset_password', [AuthController::class, 'reset_password'])->name('reset_password');
+
 // Admin routes
 Route::middleware(['checkAdmin'])->group(function () {
     // Add more admin routes here
@@ -45,4 +51,3 @@ Route::get('/index', function () {
 Route::get('/checkout', function () {
     return view('user.checkout');
 })->name('checkout');
-
