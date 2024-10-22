@@ -54,12 +54,31 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // Validate the login request
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|min:6',
+        ]);
+
+        // Attempt to log in with the provided credentials
         $credentials = $request->only('email', 'password');
 
         if (Auth::attempt($credentials)) {
+            // Regenerate session to prevent session fixation attacks
             $request->session()->regenerate();
-            return redirect()->route('user_dashboard');
+
+            // Get the authenticated user's role
+            $role = Auth::user()->role;
+
+            // Redirect based on the user's role
+            if ($role == 'admin') {
+                return redirect()->route('admin_dashboard');
+            } else {
+                return redirect()->route('user_dashboard');
+            }
         }
+
+        // If authentication fails, return back with an error
         return redirect()->back()->with('error', 'Invalid login credentials');
     }
 

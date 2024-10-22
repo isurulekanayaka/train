@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('address');
             $table->date('dob');
             $table->string('password');
-            $table->string('role')->default('user'); // You can set default roles if needed
+            $table->enum('role', ['admin', 'user'])->default('user'); // Setting the default role to 'user'
             $table->timestamps();
         });
     }
