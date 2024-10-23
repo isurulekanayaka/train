@@ -8,6 +8,11 @@
     
     <!-- SweetAlert2 CSS and JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="js/checkout.js"></script>
 
     @vite('resources/css/app.css')
     <title>Your Application</title> <!-- Add a title for better SEO -->

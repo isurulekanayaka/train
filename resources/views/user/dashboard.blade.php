@@ -1,6 +1,28 @@
 @extends('layout.user-layout') <!-- Extend the layout -->
 
 @section('user-content')
+    <!-- Success/Error Alerts -->
+    @if (session('success'))
+        <script>
+            Swal.fire({
+                icon: 'success',
+                title: 'Success!',
+                text: '{{ session('success') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
+
+    @if (session('error'))
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Error!',
+                text: '{{ session('error') }}',
+                confirmButtonText: 'OK'
+            });
+        </script>
+    @endif
     <div class="flex flex-col items-center w-full">
 
         <!-- Hero Section -->
@@ -60,8 +82,9 @@
 
         <!-- Search Section -->
         {{-- <div class="absolute flex items-center w-4/5 gap-4 mt-10 transition-shadow duration-300 transform bg-transparent rounded-lg shadow-lg opacity-90 justify-evenly" style="border: 2px solid transparent;"> --}}
-        <form action="{{ route('search_train') }}" method="POST" class="flex w-4/5 gap-4 p-8 mt-5 bg-white rounded-xl opacity-90">
-          @csrf
+        <form action="{{ route('search_train') }}" method="POST"
+            class="flex w-4/5 gap-4 p-8 mt-5 bg-white rounded-xl opacity-90">
+            @csrf
             <section class="w-1/4">
                 <select class="w-full border rounded-xl h-14 px-2" name="start_station">
                     <option value="" selected disabled>Start Point</option>
@@ -116,22 +139,22 @@
 
                             @php
                                 // Find today's status for the current train
-                                $status = $todayStatuses->where('train_id', $train->train_id)->first();
+$status = $todayStatuses->where('train_id', $train->train_id)->first();
                             @endphp
 
                             <td class="px-6 py-3">
-                                {{ $status ? $status->status : 'pending' }}
+                                {{ $status ? $status->status : 'On Time' }}
                                 <!-- Display the status or a default message -->
                             </td>
 
                             <td class="px-6 py-3">
                                 <!-- Option buttons (e.g., View/Edit/Delete) -->
                                 <div class="flex space-x-4">
-                                    <a href="#"
+                                    <a href="{{ route('train_profile', ['id' => $train->id, 'status' => $status ? $status->status : 'On Time']) }}"
                                         class="inline-block bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300">
                                         View
                                     </a>
-                                    <a href="#"
+                                    <a href="#" id="buyTicket"
                                         class="inline-block bg-green-500 text-white px-2 py-1 rounded hover:bg-green-600 focus:outline-none focus:ring focus:ring-green-300">
                                         Buy
                                     </a>
@@ -158,4 +181,29 @@
         </div>
 
     </div>
+    <script>
+        document.getElementById('buyTicket').addEventListener('click', function(event) {
+            // Prevent the default action to ensure the href is set before navigation
+            event.preventDefault();
+
+            // Get the train ID (replace with actual variable if it's dynamically generated)
+            var trainId = "{{ $train->id }}";
+
+            // Get the selected date value from the input field
+            var selectedDate = document.getElementById('dateInput').value;
+
+            // If no date is selected, show an alert or handle it
+            if (!selectedDate) {
+                alert('Please select a date.');
+                return;
+            }
+
+            // Build the URL with the train ID and selected date
+            var buyTicketUrl = "{{ route('buy_ticket', ['id' => ':trainId', 'date' => ':date']) }}";
+            buyTicketUrl = buyTicketUrl.replace(':trainId', trainId).replace(':date', selectedDate);
+
+            // Set the dynamically generated URL to the href attribute and navigate to the page
+            window.location.href = buyTicketUrl;
+        });
+    </script>
 @endsection
