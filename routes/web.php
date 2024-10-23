@@ -60,10 +60,16 @@ Route::middleware(['checkAdmin'])->group(function () {
 
     Route::post('/train_delay,', [TrainDelayController::class, 'delay'])->name('train_delay');
     Route::post('/train_cancel,', [TrainDelayController::class, 'cancel'])->name('train_cancel');
+
+    Route::get('/admin_profile', [UserController::class, 'admin_profile'])->name('admin_profile');
+
+    Route::get('edit_profile/{id}', [AdminController::class, 'edit_profile'])->name('edit_profile');
+
+    Route::get('train_details/{id}', [AdminController::class, 'train_details'])->name('train_details');
 });
 
 // User routes
-Route::middleware(['checkUser'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/user-dashboard', [UserController::class, 'user_dashboard'])->name('user_dashboard');
 
     Route::post('/train_search', [TrainDelayController::class, 'search_train'])->name('search_train');

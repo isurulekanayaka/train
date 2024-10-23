@@ -1,7 +1,7 @@
-@extends('layout.user-layout')
-<!-- Extend the layout -->
+@extends('layout.admin-layout')
 
-@section('user-content')
+@section('admin-content')
+
     <!-- Success/Error Alerts -->
     @if (session('success'))
         <script>
@@ -30,13 +30,14 @@
             <div class="w-full max-w-lg p-8 bg-white rounded-lg shadow-lg">
                 <div class="flex justify-center mb-6">
                     <div class="flex items-center justify-center bg-gray-200 rounded-full w-36 h-36">
-                        <img src="./img/user.png" alt="Profile Avatar" class="rounded-full w-28 h-28" />
+                        <img src="{{ asset('img/user.png') }}" alt="Profile Avatar" class="rounded-full w-28 h-28" />
                     </div>
                 </div>
                 <h2 class="mb-6 text-2xl font-bold text-center text-gray-800">Profile Information</h2>
                 <form class="mt-4" method="POST" action="{{ route('change_details') }}"> <!-- Update action as needed -->
                     @csrf
                     <input type="hidden" id="id" name="id" value="{{ $user->id ?? '' }}" />
+
                     <div class="mb-4">
                         <label for="newFullName" class="block mb-2 text-sm font-semibold text-gray-700">Full Name:</label>
                         <input type="text" id="newFullName" name="userFullName" value="{{ $user->full_name ?? '' }}"

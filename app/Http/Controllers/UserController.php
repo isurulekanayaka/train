@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\PaymentDetail;
+use Exception;
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Train;
 use App\Models\TrainLog;
 use App\Models\TrainStation;
-use Exception;
 use Illuminate\Http\Request;
+use App\Models\PaymentDetail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -46,6 +47,13 @@ class UserController extends Controller
         $user = Auth::user();
         return view('user.user-profile', compact('user'));
     }
+
+    public function admin_profile()
+    {
+        $user = Auth::user();
+        return view('admin.user-profile', compact('user'));
+    }
+
     public function change_details(Request $request)
     {
         // Validate the request data
@@ -56,11 +64,12 @@ class UserController extends Controller
             'userNic' => 'nullable|string|max:255',
             'userBday' => 'required|date|before:today',
             'userAddress' => 'nullable|string|max:255',
+            'id' => 'required',
         ]);
 
         try {
-            // Get the currently authenticated user
-            $user = Auth::user();
+            // Find the user by ID
+            $user = User::find($request->id);
 
             // Update user profile details
             $user->full_name = $validated['userFullName'];
