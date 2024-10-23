@@ -24,4 +24,9 @@ class TrainStation extends Model
     {
         return $this->belongsTo(Train::class);
     }
+
+    public function paymentDetails()
+    {
+        return $this->hasMany(PaymentDetail::class, 'train_station_id');
+    }
 }

@@ -1,164 +1,205 @@
 @extends('layout.user-layout')
 
 @section('user-content')
-<div class="container w-full p-5 mx-auto">
-    <div class="mb-5 title-area">
-        <div class="title">
-            <h2 class="text-2xl font-bold">Buy Your Seat</h2>
-            <span class="text-gray-500">Dashboard / Buy Your Seat / Reserve Seat</span>
+    <div class="container w-full p-5 mx-auto">
+        <div class="mb-5 title-area">
+            <div class="title">
+                <h2 class="text-2xl font-bold">Buy Your Seat</h2>
+                <span class="text-gray-500">Dashboard / Buy Your Seat / Reserve Seat</span>
+            </div>
         </div>
-    </div>
-    <div class="p-5 bg-white rounded-lg shadow-lg">
-        <div class="flex flex-wrap space-x-10">
-            <!-- Left Side: Fill All Details -->
-            <div class="flex-1 w-full md:w-1/2 fill-space">
-                <div class="text-lg font-semibold fill-title">Fill All Details</div>
-                <div class="my-2 border-b border-gray-300 hori-line"></div>
-                <div class="mt-3 under-line">
-                    <div class="flex flex-wrap space-y-6 md:flex-nowrap md:space-y-0">
-                        <!-- Left side -->
-                        <div class="w-full space-y-4 md:w-1/2 details">
-                            <div class="detail">
-                                <div class="font-semibold detail-title">First Name</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
+        <div class="flex flex-wrap space-y-6 md:space-y-0 md:flex-nowrap gap-5 p-6 bg-gray-50">
+            <!-- Left side: User & Train Details -->
+            <div class="container mx-auto p-6 w-7/12">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-1">
 
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Last Name</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
+                    <!-- Column 1: User & Fare Details -->
+                    <div class="w-full p-6 bg-white shadow-md rounded-lg">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-800">User & Fare Details</h2>
 
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Phone Number</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
+                        <!-- User Details Section -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-semibold text-blue-500">User Details</h3>
+                            <div class="space-y-4 mt-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-user text-blue-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Full Name:</span>
+                                    <span class="ml-auto text-gray-800">{{ $user->full_name }}</span>
                                 </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Train Name</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Train Number</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Station Name</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Start Point</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Destination Point</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Arrival Time</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Departure Time</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Train Fare 1st Class</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Train Fare 2nd Class</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
-                                </div>
-                            </div>
-
-                            <div class="detail">
-                                <div class="font-semibold detail-title">Train Fare 3rd Class</div>
-                                <div class="detail-content">
-                                    <span class="block w-full mt-1"></span>
+                                <div class="flex items-center">
+                                    <i class="fas fa-phone-alt text-green-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Phone Number:</span>
+                                    <span class="ml-auto text-gray-800">{{ $user->contact }}</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- Right side -->
-                        <div class="flex-1 w-full mt-5 md:mt-0 md:w-1/2 select-pass" id="select-pass">
-                            <div class="select-nav">
-                                <div class="font-semibold select-title">Passenger Information</div>
-                            </div>
-
-                            <div class="p-6 bg-white rounded-lg shadow-md">
-                                <div class="mb-4">
-                                    <label class="block mb-1 font-semibold text-gray-700" for="noOfUsers">No of Passengers</label>
-                                    <input type="number" min="1" max="5" name="noOfUsers" id="noOfUsers"
-                                        class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        placeholder="Enter the number of passengers" required onchange="updatePrice()">
+                        <!-- Fare Details Section -->
+                        <div>
+                            <h3 class="text-lg font-semibold text-blue-500">Train Fare</h3>
+                            <div class="space-y-4 mt-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-coins text-yellow-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">1st Class:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->train->fare1stClass }}</span>
                                 </div>
-                            
-                                <div class="mb-4">
-                                    <label class="block mb-1 font-semibold text-gray-700" for="ticketClass">Ticket Class</label>
-                                    <select name="ticketClass" id="ticketClass"
-                                        class="block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                                        required onchange="updatePrice()">
-                                        <option value="" disabled selected>Select Class</option>
-                                        <option value="1st Class">1st Class</option>
-                                        <option value="2nd Class">2nd Class</option>
-                                        <option value="3rd Class">3rd Class</option>
-                                    </select>
+                                <div class="flex items-center">
+                                    <i class="fas fa-coins text-yellow-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">2nd Class:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->train->fare2ndClass }}</span>
                                 </div>
-                            
-                                <div class="p-4 mt-4 bg-gray-100 rounded-md">
-                                    <div class="text-lg font-medium text-gray-600" id="classPrice">Fare: Rs. 0</div>
-                                    <div class="mt-2 text-lg font-semibold text-green-600">
-                                        Total Fare: Rs. <span id="totalPrice">0</span>
-                                    </div>
-                                    <input type="hidden" id="oneperson" name="oneperson">
-                                </div>
-                            
-                                <div class="flex justify-between mt-6">
-                                    <button class="px-6 py-3 text-white transition duration-150 ease-in-out bg-green-500 rounded-lg hover:bg-green-600"
-                                        onclick="redirectToCheckout()">Checkout</button>
+                                <div class="flex items-center">
+                                    <i class="fas fa-coins text-yellow-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">3rd Class:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->train->fare3rdClass }}</span>
                                 </div>
                             </div>
-                            
+                        </div>
                     </div>
 
+                    <!-- Column 2: Train Details -->
+                    <div class="w-full p-6 bg-white shadow-md rounded-lg">
+                        <h2 class="text-2xl font-bold mb-6 text-gray-800">Train Details</h2>
 
+                        <!-- Train Details Section -->
+                        <div class="mb-6">
+                            <div class="space-y-4 mt-3">
+                                <div class="flex items-center">
+                                    <i class="fas fa-train text-purple-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Train Name:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->train->trainName }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-hashtag text-orange-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Train Number:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->train->trainNumber }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-map-marker-alt text-red-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Start Point:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->start_station }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-flag-checkered text-teal-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Destination Point:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->end_station }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-blue-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Arrival Time:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->time }}</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <i class="fas fa-clock text-blue-400 mr-3"></i>
+                                    <span class="text-gray-600 font-semibold">Departure Time:</span>
+                                    <span class="ml-auto text-gray-800">{{ $train->end }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
 
+
+            <!-- Right Side: Passenger Information -->
+            <div class="w-full md:w-5/12 p-6 bg-white shadow-lg rounded-lg">
+                <h2 class="text-2xl font-bold mb-6 text-gray-900">Passenger Information</h2>
+
+                <!-- Form Start -->
+                <form action="{{ route('checkout') }}" method="POST">
+                    @csrf
+
+                    <!-- Passenger Count -->
+                    <div class="mb-6">
+                        <label for="noOfUsers" class="block text-gray-700 font-semibold mb-2">Number of Passengers</label>
+                        <input type="number" id="noOfUsers" name="noOfUsers"
+                            class="mt-1 py-2 px-4 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            placeholder="Enter number of passengers" oninput="updatePrice()" required>
+                    </div>
+
+                    <!-- Ticket Class Selection -->
+                    <div class="mb-6">
+                        <label for="ticketClass" class="block text-gray-700 font-semibold mb-2">Select Ticket Class</label>
+                        <select id="ticketClass" name="ticketClass"
+                            class="mt-1 py-2 px-4 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                            onchange="updatePrice()" required>
+                            <option value="" disabled selected>Select a Class</option>
+                            <option value="1st Class">1st Class</option>
+                            <option value="2nd Class">2nd Class</option>
+                            <option value="3rd Class">3rd Class</option>
+                        </select>
+                    </div>
+
+                    <!-- Price Summary -->
+                    <div class="bg-blue-50 p-5 rounded-lg shadow-sm">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-gray-600">Travel Date:</span>
+                            <span class="text-gray-800 font-semibold">{{ $date }}</span>
+                            <input type="hidden" name="date" value="{{ $date }}">
+                        </div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-gray-600">Ticket Fare:</span>
+                            <span class="text-gray-800 font-semibold">Rs. <span id="classPrice">0</span></span>
+                            <input type="hidden" name="classPrice" id="hiddenClassPrice" value="0">
+                        </div>
+                        <div class="flex justify-between items-center text-green-600 font-bold text-lg">
+                            <span>Total Fare:</span>
+                            <span>Rs. <span id="totalPrice">0</span></span>
+                            <input type="hidden" name="totalPrice" id="hiddenTotalPrice" value="0">
+                        </div>
+                    </div>
+
+                    <!-- Hidden Input -->
+                    <input type="hidden" value="{{ $train->id }}" name="train_station_id">
+
+                    <!-- Checkout Button -->
+                    <div class="flex justify-end mt-8">
+                        <button
+                            class="px-6 py-3 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 focus:outline-none transition duration-300">
+                            Proceed to Checkout
+                        </button>
+                    </div>
+                </form>
+                <!-- Form End -->
             </div>
 
 
         </div>
-    </div>
-</div>
-@endsection
+        <script>
+            // Example fares for each class from backend PHP values
+            const fare1stClass = {{ $train->train->fare1stClass }};
+            const fare2ndClass = {{ $train->train->fare2ndClass }};
+            const fare3rdClass = {{ $train->train->fare3rdClass }};
+        
+            function updatePrice() {
+                const noOfUsers = document.getElementById("noOfUsers").value;
+                const ticketClass = document.getElementById("ticketClass").value;
+                let classFare = 0;
+        
+                // Determine fare based on the selected class
+                switch (ticketClass) {
+                    case "1st Class":
+                        classFare = fare1stClass;
+                        break;
+                    case "2nd Class":
+                        classFare = fare2ndClass;
+                        break;
+                    case "3rd Class":
+                        classFare = fare3rdClass;
+                        break;
+                    default:
+                        classFare = 0;
+                        break;
+                }
+        
+                // Update the fare for one person and total fare for all passengers
+                document.getElementById("classPrice").innerText = classFare;
+                const totalFare = classFare * noOfUsers;
+                document.getElementById("totalPrice").innerText = totalFare;
+        
+                // Update hidden inputs for submission
+                document.getElementById("hiddenClassPrice").value = classFare;
+                document.getElementById("hiddenTotalPrice").value = totalFare;
+            }
+        </script>
+    @endsection

@@ -28,6 +28,10 @@ class User extends Authenticatable
         'role',
     ];
 
+    public function paymentDetails()
+    {
+        return $this->hasMany(PaymentDetail::class);
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

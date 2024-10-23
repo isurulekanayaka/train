@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\TrainController;
 use App\Http\Controllers\TrainDelayController;
 use App\Http\Controllers\UserController;
@@ -65,7 +66,15 @@ Route::middleware(['checkAdmin'])->group(function () {
 Route::middleware(['checkUser'])->group(function () {
     Route::get('/user-dashboard', [UserController::class, 'user_dashboard'])->name('user_dashboard');
 
-    Route::post('train_search', [UserController::class, 'search_train'])->name('search_train');
+    Route::post('/train_search', [TrainDelayController::class, 'search_train'])->name('search_train');
+
+    Route::get('/train_profile/{id}/{status}', [TrainDelayController::class, 'train_profile'])->name('train_profile');
+
+    Route::get('/buy/{id}/{date}', [PaymentController::class, 'buy_ticket'])->name('buy_ticket');
+
+    Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+
+    Route::post('/payment', [PaymentController::class, 'payment'])->name('payment');
 });
 
 Route::get('/book-ticket', function () {
