@@ -77,6 +77,11 @@ Route::middleware(['checkUser'])->group(function () {
     Route::post('/payment', [PaymentController::class, 'payment'])->name('payment');
 
     Route::get('/history', [UserController::class, 'history'])->name('history');
+
+    Route::get('/user_profile', [UserController::class, 'User_profile'])->name('user_profile');
+
+    Route::post('change_details', [UserController::class, 'change_details'])->name('change_details');
+    Route::post('change_password', [UserController::class, 'change_password'])->name('change_password');
 });
 
 Route::get('/book-ticket', function () {
