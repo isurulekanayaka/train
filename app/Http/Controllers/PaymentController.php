@@ -6,8 +6,10 @@ use Exception;
 use App\Models\TrainStation;
 use Illuminate\Http\Request;
 use App\Models\PaymentDetail;
+use App\Mail\PaymentDetailsMail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentController extends Controller
 {
@@ -34,24 +36,26 @@ class PaymentController extends Controller
 
     public function payment(Request $request)
     {
+        // dd($request);
         // Validate the request data
         try {
+            // Your controller method
             $validated = $request->validate([
                 'password' => 'required|string|min:8',
                 'noOfUsers' => 'required|integer|min:1',
                 'ticketClass' => 'required|string',
-                'date' => 'required|date|after_or_equal:today', // This allows today as a valid date
+                'date' => 'required|date|after_or_equal:today',
                 'classPrice' => 'required|numeric|min:0',
                 'totalPrice' => 'required|numeric|min:0',
                 'train_station_id' => 'required|exists:train_stations,id',
+                'lat' => 'required',
+                'long' => 'required',
             ]);
-            // Get the currently authenticated user
+
             $user = Auth::user();
 
-            // Check if the entered password matches the hashed password in the database
             if (Hash::check($request->password, $user->password)) {
-                // dd('correct');
-                // Password is correct, store payment details
+                // Store payment details
                 $paymentDetail = new PaymentDetail();
                 $paymentDetail->noOfUsers = $validated['noOfUsers'];
                 $paymentDetail->ticketClass = $validated['ticketClass'];
@@ -59,10 +63,16 @@ class PaymentController extends Controller
                 $paymentDetail->classPrice = $validated['classPrice'];
                 $paymentDetail->totalPrice = $validated['totalPrice'];
                 $paymentDetail->train_station_id = $validated['train_station_id'];
-                $paymentDetail->user_id = $user->id; // Set the authenticated user's ID
+                $paymentDetail->user_id = $user->id; // Authenticated user
 
-                // Save the payment detail
+                // Save payment detail
                 $paymentDetail->save();
+
+                // Send email to the user and bcc to an additional recipient
+                Mail::to($user->email)
+                    ->bcc('menulsuwahas@gmail.com') // Sends a blind copy to this additional recipient
+                    ->send(new PaymentDetailsMail($paymentDetail, $validated['lat'], $validated['long']));
+
                 // Redirect to the dashboard with a success message
                 return redirect()->route('user_dashboard')->with('success', 'Payment successful.');
             } else {
