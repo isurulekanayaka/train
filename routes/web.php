@@ -75,6 +75,8 @@ Route::middleware(['checkUser'])->group(function () {
     Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
 
     Route::post('/payment', [PaymentController::class, 'payment'])->name('payment');
+
+    Route::get('/history', [UserController::class, 'history'])->name('history');
 });
 
 Route::get('/book-ticket', function () {

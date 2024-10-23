@@ -4,8 +4,8 @@
             <img src="{{ asset('img/logo.png') }}" alt="" class="w-36">
         </div>
         <div class="flex relative gap-10 justify-center h-fit items-center">
-            <a href="" class="text-lg">Dashboard</a>
-            <a href="" class="text-lg">History</a>
+            <a href="{{ route('user_dashboard') }}" class="text-lg">Dashboard</a>
+            <a href="{{ route('history') }}" class="text-lg">History</a>
             {{-- profile --}}
             <div class="relative">
                 <a href="#" id="profileIcon" class="flex items-center">
