@@ -15,6 +15,7 @@ class TrainStation extends Model
     protected $fillable = [
         'train_id',
         'time',
+        'end',
         'start_station',
         'end_station',
     ];

@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id(); // Auto-incrementing ID
             $table->foreignId('train_id')->constrained('trains')->onDelete('cascade'); // Foreign key to trains table
             $table->time('time'); // Time at the station
+            $table->time('end'); // Time at the station
             $table->string('start_station'); // Station Start
             $table->string('end_station'); // Station End
             $table->timestamps(); // Created and updated timestamps

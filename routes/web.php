@@ -64,6 +64,8 @@ Route::middleware(['checkAdmin'])->group(function () {
 // User routes
 Route::middleware(['checkUser'])->group(function () {
     Route::get('/user-dashboard', [UserController::class, 'user_dashboard'])->name('user_dashboard');
+
+    Route::post('train_search', [UserController::class, 'search_train'])->name('search_train');
 });
 
 Route::get('/book-ticket', function () {

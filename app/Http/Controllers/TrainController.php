@@ -36,6 +36,8 @@ class TrainController extends Controller
                 "end_station.*" => "required|string",
                 "time" => "required|array|min:1",
                 "time.*" => "required|date_format:H:i",
+                "end" => "required|array|min:1",
+                "end.*" => "required|date_format:H:i",
             ]);
     
             // Create the Train record
@@ -61,6 +63,7 @@ class TrainController extends Controller
                     $stationData = [
                         'train_id' => $train->id, // Foreign key to the train
                         'time' => $request->time[$index], // Corresponding time for the station
+                        'end' => $request->end[$index], // Corresponding time for the station
                         'end_station' => $request->end_station[$index], // Corresponding end station
                         'start_station' => $stationName, // Start station from the request
                     ];
