@@ -23,4 +23,8 @@ class Train extends Model
     {
         return $this->hasMany(TrainStation::class);
     }
+    public function logs()
+    {
+        return $this->hasMany(TrainLog::class);
+    }
 }
