@@ -10,7 +10,9 @@
                         <th class="px-6 py-3 text-left">Train Number</th>
                         <th class="px-6 py-3 text-left">Train Name</th>
                         <th class="px-6 py-3 text-left">Start Point</th>
+                        <th class="px-6 py-3 text-left">Start Time</th>
                         <th class="px-6 py-3 text-left">End Point</th>
+                        <th class="px-6 py-3 text-left">End Time</th>
                         <th class="px-6 py-3 text-left">First Class</th>
                         <th class="px-6 py-3 text-left">Second Class</th>
                         <th class="px-6 py-3 text-left">Third Class</th>
@@ -20,21 +22,23 @@
                 <tbody id="" class="text-sm font-light text-gray-600">
                     @forelse ($trains as $train)
                         <tr>
-                            <td class="px-6 py-3">{{ $train->trainNumber }}</td>
-                            <td class="px-6 py-3">{{ $train->trainName }}</td>
-                            <td class="px-6 py-3">{{ $train->startPoint }}</td>
-                            <td class="px-6 py-3">{{ $train->endPoint }}</td>
-                            <td class="px-6 py-3">{{ number_format($train->fare1stClass, 2) }}</td>
-                            <td class="px-6 py-3">{{ number_format($train->fare2ndClass, 2) }}</td>
-                            <td class="px-6 py-3">{{ number_format($train->fare3rdClass, 2) }}</td>
+                            <td class="px-6 py-3">{{ $train->train->trainNumber }}</td>
+                            <td class="px-6 py-3">{{ $train->train->trainName }}</td>
+                            <td class="px-6 py-3">{{ $train->start_station }}</td>
+                            <td class="px-6 py-3">{{ $train->time }}</td>
+                            <td class="px-6 py-3">{{ $train->end_station }}</td>
+                            <td class="px-6 py-3">{{ $train->end }}</td>
+                            <td class="px-6 py-3">{{ number_format($train->train->fare1stClass, 2) }}</td>
+                            <td class="px-6 py-3">{{ number_format($train->train->fare2ndClass, 2) }}</td>
+                            <td class="px-6 py-3">{{ number_format($train->train->fare3rdClass, 2) }}</td>
                             <td class="px-6 py-3">
                                 <!-- Option buttons (e.g., View/Edit/Delete) -->
                                 <div class="flex space-x-4">
-                                    <a href="#"
+                                    <a href="{{ route('train_details', ['id'=>$train->id]) }}"
                                         class="inline-block bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
                                         View
                                     </a>
-                                    <a href="#"
+                                    <a href="{{ route('train_details', ['id'=>$train->id]) }}"
                                         class="inline-block bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700 focus:outline-none focus:ring focus:ring-yellow-300">
                                         Edit
                                     </a>

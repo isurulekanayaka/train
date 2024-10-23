@@ -25,6 +25,7 @@
                         <th class="px-4 py-2 border-b">Email<span class="icon-arrow">&UpArrow;</span></th>
                         <th class="px-4 py-2 border-b">Contact<span class="icon-arrow">&UpArrow;</span></th>
                         <th class="px-4 py-2 border-b">NIC<span class="icon-arrow">&UpArrow;</span></th>
+                        <th class="px-4 py-2 border-b">Role<span class="icon-arrow">&UpArrow;</span></th>
                         <th class="px-4 py-2 border-b">Actions</th>
                     </tr>
                 </thead>
@@ -37,11 +38,12 @@
                             <td class="px-4 py-2 border-b">{{ $user->email }}</td>
                             <td class="px-4 py-2 border-b">{{ $user->contact }}</td>
                             <td class="px-4 py-2 border-b">{{ $user->nic }}</td>
+                            <td class="px-4 py-2 border-b">{{ $user->role }}</td>
                             <td class="px-4 py-2 border-b">
                                 <div class="flex space-x-4">
-                                    <a href="#"
+                                    <a href="{{ route('edit_profile', ['id'=>$user->id]) }}"
                                         class="inline-block bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">View</a>
-                                    <a href="#"
+                                    <a href="{{ route('edit_profile', ['id'=>$user->id]) }}"
                                         class="inline-block bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700 focus:outline-none focus:ring focus:ring-yellow-300">Edit</a>
                                     <form action="#" method="POST" class="inline">
                                         @csrf
