@@ -106,6 +106,8 @@
                             <input type="hidden" value="{{ $classPrice }}" name="classPrice">
                             <input type="hidden" value="{{ $totalPrice }}" name="totalPrice">
                             <input type="hidden" value="{{ $train_station_id }}" name="train_station_id">
+                            <input type="hidden" name="lat" id="lat">
+                            <input type="hidden" name="long" id="long">
                             <div class="mt-4 flex justify-end">
                                 <button type="submit"
                                     class="px-4 py-2 font-bold text-white bg-blue-600 rounded-lg">Submit</button>
@@ -161,6 +163,43 @@
                     });
                 </script>
 
+                {{-- map  --}}
+                <script>
+                    // Automatically call getLocation when the page loads
+                    window.onload = function() {
+                        getLocation();
+                    };
+
+                    function getLocation() {
+                        if (navigator.geolocation) {
+                            navigator.geolocation.getCurrentPosition(setPosition, showError);
+                        } else {
+                            alert("Geolocation is not supported by this browser.");
+                        }
+                    }
+
+                    function setPosition(position) {
+                        document.getElementById('lat').value = position.coords.latitude;
+                        document.getElementById('long').value = position.coords.longitude;
+                    }
+
+                    function showError(error) {
+                        switch (error.code) {
+                            case error.PERMISSION_DENIED:
+                                alert("User denied the request for Geolocation.");
+                                break;
+                            case error.POSITION_UNAVAILABLE:
+                                alert("Location information is unavailable.");
+                                break;
+                            case error.TIMEOUT:
+                                alert("The request to get user location timed out.");
+                                break;
+                            case error.UNKNOWN_ERROR:
+                                alert("An unknown error occurred.");
+                                break;
+                        }
+                    }
+                </script>
             </div>
         </div>
 
