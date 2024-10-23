@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TrainController;
+use App\Http\Controllers\TrainDelayController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -53,6 +54,11 @@ Route::middleware(['checkAdmin'])->group(function () {
 
     Route::get('/all_users', [AdminController::class, 'all_users'])->name('all_users');
 
+    Route::get('/train_delay,', [TrainDelayController::class, 'delay_view'])->name('train_delay');
+    Route::get('/train_cancel,', [TrainDelayController::class, 'cancel_view'])->name('train_cancel');
+
+    Route::post('/train_delay,', [TrainDelayController::class, 'delay'])->name('train_delay');
+    Route::post('/train_cancel,', [TrainDelayController::class, 'cancel'])->name('train_cancel');
 });
 
 // User routes

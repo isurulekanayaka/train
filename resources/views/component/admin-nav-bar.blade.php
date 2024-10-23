@@ -15,8 +15,8 @@
              <div id="trainDropdown" class="absolute right-0 z-10 hidden mt-2 bg-white rounded-lg shadow-lg w-52">
                  <div class="w-full p-2">
                      <a href="{{ route('add_train') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Add Trains</a>
-                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Delay Trains</a>
-                     <a href="#" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Cancel Trains</a>
+                     <a href="{{ route('train_delay') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Delay Trains</a>
+                     <a href="{{ route('train_cancel') }}" class="block px-4 py-2 text-gray-800 hover:bg-gray-200">Cancel Trains</a>
                  </div>
              </div>
             </div>
