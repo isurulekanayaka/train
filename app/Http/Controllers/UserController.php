@@ -36,7 +36,9 @@ class UserController extends Controller
         $userId = Auth::id();
 
         // Retrieve payment details for the authenticated user
+
         $details = PaymentDetail::where('user_id', $userId)->paginate(10); // Use get() to retrieve results
+
 
         // Pass the details to the view
         return view('user.purchase-history', compact('details'));
