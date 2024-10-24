@@ -21,7 +21,7 @@
              </div>
             </div>
 
-                <a href="" class="text-lg">Reservations</a>
+                <a href="{{ route('reservations') }}" class="text-lg">Reservations</a>
                 <a href="{{ route('all_users') }}" class="text-lg">Users</a>
 
                 {{-- profile --}}

@@ -2,6 +2,28 @@
 
 @section('admin-content')
     <div class="w-full p-6 bg-white rounded-lg shadow-md">
+         <!-- Success/Error Alerts -->
+         @if (session('success'))
+         <script>
+             Swal.fire({
+                 icon: 'success',
+                 title: 'Success!',
+                 text: '{{ session('success') }}',
+                 confirmButtonText: 'OK'
+             });
+         </script>
+     @endif
+
+     @if (session('error'))
+         <script>
+             Swal.fire({
+                 icon: 'error',
+                 title: 'Error!',
+                 text: '{{ session('error') }}',
+                 confirmButtonText: 'OK'
+             });
+         </script>
+     @endif
         <section class="mb-4">
             <h1 class="mb-4 text-2xl font-semibold">User Details</h1>
 
