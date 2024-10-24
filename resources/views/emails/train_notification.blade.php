@@ -61,6 +61,8 @@
             <p>New Estimated Time: <span class="highlight">{{ $trainDetails['time'] }}</span></p>
         @else
             <p>Reason for the cancellation: <span class="highlight">{{ $trainDetails['reason'] }}</span></p>
+            <p style="color: red;">We sincerely apologize for the inconvenience caused. To receive your refund, kindly visit us within the next two days. Our dedicated team is ready to assist you and ensure a quick, hassle-free process.</p>
+
         @endif
 
         <p>Thank you for your patience and understanding.</p>
