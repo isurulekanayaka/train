@@ -21,16 +21,24 @@
             <div class="flex mx-5">
                 <div>
                     <p class="text-lg m-5 group relative w-max h-8">
-                        <a href="{{ route('login') }}"
-                            class="group-hover:text-white text-white text-2xl font-mono font-semibold">Login</a>
+                        <a href="{{ route('home') }}"
+                            class="group-hover:text-white text-white text-2xl font-mono font-semibold">Home</a>
                         <span
                             class="absolute left-0 bottom-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-white"></span>
                     </p>
                 </div>
                 <div>
                     <p class="text-lg m-5 group relative w-max h-8">
-                        <a href="#"
+                        <a href="{{ route('about') }}"
                             class="group-hover:text-white text-white text-2xl font-mono font-semibold">About Us</a>
+                        <span
+                            class="absolute left-0 bottom-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-white"></span>
+                    </p>
+                </div>
+                <div>
+                    <p class="text-lg m-5 group relative w-max h-8">
+                        <a href="{{ route('login') }}"
+                            class="group-hover:text-white text-white text-2xl font-mono font-semibold">Login</a>
                         <span
                             class="absolute left-0 bottom-0 w-0 group-hover:w-full transition-all duration-300 h-0.5 bg-white"></span>
                     </p>

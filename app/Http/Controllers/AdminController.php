@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PaymentDetail;
 use App\Models\Train;
 use App\Models\TrainStation;
 use App\Models\User;
@@ -35,4 +36,12 @@ class AdminController extends Controller
         $train = TrainStation::find($id);
         return view('admin.train_details', compact('train'));
     }
+
+    public function reservations()
+    {
+        $details = PaymentDetail::paginate(10); // Fetch and paginate the records
+    
+        return view('admin.reservation', compact('details'));
+    }
+    
 }

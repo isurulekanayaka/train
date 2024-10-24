@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 
 class TrainController extends Controller
 {
-    
+
     public function add_trainView()
     {
         return view('admin.add-train');
@@ -19,7 +19,7 @@ class TrainController extends Controller
     {
         // Dump the request data for debugging (remove this in production)
         // dd($request);
-    
+
         try {
             // Validate the request
             $request->validate([
@@ -39,7 +39,7 @@ class TrainController extends Controller
                 "end" => "required|array|min:1",
                 "end.*" => "required|date_format:H:i",
             ]);
-    
+
             // Create the Train record
             $train = Train::create([
                 'trainNumber' => $request->trainNumber,
@@ -50,13 +50,15 @@ class TrainController extends Controller
                 'fare2ndClass' => $request->fare2ndClass,
                 'fare3rdClass' => $request->fare3rdClass,
             ]);
-    
+
             // Ensure that the station and time arrays are of the same length
-            if (count($request->start_station) !== count($request->end_station) || 
-                count($request->end_station) !== count($request->time)) {
+            if (
+                count($request->start_station) !== count($request->end_station) ||
+                count($request->end_station) !== count($request->time)
+            ) {
                 return redirect()->back()->with('error', 'Mismatch in the number of start stations, end stations, or times.');
             }
-    
+
             // Loop through the stations and create TrainStation records
             foreach ($request->start_station as $index => $stationName) {
                 try {
@@ -67,18 +69,67 @@ class TrainController extends Controller
                         'end_station' => $request->end_station[$index], // Corresponding end station
                         'start_station' => $stationName, // Start station from the request
                     ];
-                    
+
                     Log::info('Creating station:', $stationData);
                     TrainStation::create($stationData);
                 } catch (Exception $e) {
                     Log::error('Failed to create station: ' . $e->getMessage());
                 }
             }
-    
+
             return redirect()->back()->with('success', 'Train added successfully!');
         } catch (Exception $e) {
             return redirect()->back()->with('error', 'Failed to add train: ' . $e->getMessage());
         }
     }
-    
+
+
+    public function update(Request $request)
+    {
+        try {
+            $validated = $request->validate([
+                'id' => 'required|exists:train_stations,id',
+                'time' => 'required|date_format:H:i:s',
+                'end' => 'required|date_format:H:i:s',
+                'start_station' => 'required|string|max:255',
+                'end_station' => 'required|string|max:255',
+                'trainNumber' => 'required|string|max:255',
+                'trainName' => 'required|string|max:255',
+                'fare1stClass' => 'required|numeric',
+                'fare2ndClass' => 'required|numeric',
+                'fare3rdClass' => 'required|numeric',
+            ]);
+
+            // dd($request);
+            // Find the TrainStation record
+            $trainStation = TrainStation::findOrFail($request->id);
+
+            // Update the TrainStation record
+            $trainStation->update([
+                'time' => $request->time,
+                'end' => $request->end,
+                'start_station' => $request->start_station,
+                'end_station' => $request->end_station,
+            ]);
+
+            // Find the associated Train record using train_id from TrainStation
+            $train = Train::findOrFail($trainStation->train_id);
+
+            // Update the Train record
+            $train->update([
+                'trainNumber' => $request->trainNumber,
+                'trainName' => $request->trainName,
+                'fare1stClass' => $request->fare1stClass,
+                'fare2ndClass' => $request->fare2ndClass,
+                'fare3rdClass' => $request->fare3rdClass,
+            ]);
+
+            // Redirect to the admin dashboard with a success message
+            return redirect()->route('admin_dashboard')->with([
+                'success' => 'Train and Train Station updated successfully'
+            ]);
+        } catch (Exception $e) {
+            return redirect()->back()->with('error', 'Failed to update train: ' . $e->getMessage());
+        }
+    }
 }

@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 Route::get('/index', function () {
     return view('welcome');
 })->name('index');
@@ -29,7 +29,7 @@ Route::get('/index', function () {
 
 Route::get('/about-us', function () {
     return view('about-us');
-});
+})->name('about');
 
 
 
@@ -63,9 +63,13 @@ Route::middleware(['checkAdmin'])->group(function () {
 
     Route::get('/admin_profile', [UserController::class, 'admin_profile'])->name('admin_profile');
 
-    Route::get('edit_profile/{id}', [AdminController::class, 'edit_profile'])->name('edit_profile');
+    Route::get('/edit_profile/{id}', [AdminController::class, 'edit_profile'])->name('edit_profile');
 
-    Route::get('train_details/{id}', [AdminController::class, 'train_details'])->name('train_details');
+    Route::get('/train_details/{id}', [AdminController::class, 'train_details'])->name('train_details');
+
+    Route::get('/reservations',[AdminController::class, 'reservations'])->name('reservations');
+
+    Route::post('/update_train', [TrainController::class, 'update'])->name('update_train');
 });
 
 // User routes
@@ -86,8 +90,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/user_profile', [UserController::class, 'User_profile'])->name('user_profile');
 
-    Route::post('change_details', [UserController::class, 'change_details'])->name('change_details');
-    Route::post('change_password', [UserController::class, 'change_password'])->name('change_password');
+    Route::post('/change_details', [UserController::class, 'change_details'])->name('change_details');
+    Route::post('/change_password', [UserController::class, 'change_password'])->name('change_password');
 });
 
 Route::get('/book-ticket', function () {

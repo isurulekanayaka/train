@@ -2,6 +2,28 @@
 
 @section('admin-content')
     <div class="flex flex-col items-center w-full">
+        <!-- Success/Error Alerts -->
+        @if (session('success'))
+            <script>
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: '{{ session('success') }}',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
+
+        @if (session('error'))
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: '{{ session('error') }}',
+                    confirmButtonText: 'OK'
+                });
+            </script>
+        @endif
         <!-- Train Table -->
         <div class="w-full mt-8 overflow-x-auto bg-white rounded-lg shadow-lg ">
             <table class="min-w-full bg-white border border-gray-200">
@@ -34,11 +56,11 @@
                             <td class="px-6 py-3">
                                 <!-- Option buttons (e.g., View/Edit/Delete) -->
                                 <div class="flex space-x-4">
-                                    <a href="{{ route('train_details', ['id'=>$train->id]) }}"
+                                    <a href="{{ route('train_details', ['id' => $train->id]) }}"
                                         class="inline-block bg-blue-600 text-white px-2 py-1 rounded hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300">
                                         View
                                     </a>
-                                    <a href="{{ route('train_details', ['id'=>$train->id]) }}"
+                                    <a href="{{ route('train_details', ['id' => $train->id]) }}"
                                         class="inline-block bg-yellow-600 text-white px-2 py-1 rounded hover:bg-yellow-700 focus:outline-none focus:ring focus:ring-yellow-300">
                                         Edit
                                     </a>

@@ -3,6 +3,28 @@
 @section('admin-content')
 
 <div class="container w-full p-5 mx-auto">
+     <!-- Success/Error Alerts -->
+     @if (session('success'))
+     <script>
+         Swal.fire({
+             icon: 'success',
+             title: 'Success!',
+             text: '{{ session('success') }}',
+             confirmButtonText: 'OK'
+         });
+     </script>
+ @endif
+
+ @if (session('error'))
+     <script>
+         Swal.fire({
+             icon: 'error',
+             title: 'Error!',
+             text: '{{ session('error') }}',
+             confirmButtonText: 'OK'
+         });
+     </script>
+ @endif
     <main class="p-5 bg-white rounded-lg shadow-md">
         <section class="mb-4">
             <h1 class="mb-2 text-xl font-bold">Train Details</h1>
