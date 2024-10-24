@@ -112,7 +112,7 @@
                     <!-- Passenger Count -->
                     <div class="mb-6">
                         <label for="noOfUsers" class="block text-gray-700 font-semibold mb-2">Number of Passengers</label>
-                        <input type="number" id="noOfUsers" name="noOfUsers"
+                        <input type="number" id="noOfUsers" name="noOfUsers" min="1"
                             class="mt-1 py-2 px-4 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                             placeholder="Enter number of passengers" oninput="updatePrice()" required>
                     </div>
